@@ -40,13 +40,23 @@ export default function HeaderStats() {
             <span>
               {formatKeys(k[0])}:{" "}
               <p style={posOrNegColor(k[1])}>{k[1].toFixed(2)}%</p>
-              <span
-                className="material-icons md-36"
-                id="arrow-icon"
-                style={posOrNegColor(k[1])}
-              >
-                arrow_upward
-              </span>
+              {k[1] > 0 ? (
+                <span
+                  className="material-icons md-36"
+                  id="arrow-icon"
+                  style={posOrNegColor(k[1])}
+                >
+                  arrow_upward
+                </span>
+              ) : (
+                <span
+                  className="material-icons md-36"
+                  id="arrow-icon"
+                  style={posOrNegColor(k[1])}
+                >
+                  arrow_downward
+                </span>
+              )}
             </span>
           </div>
         );
