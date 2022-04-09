@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  increment,
-  decrement,
-  selectCount,
-  selectGlobalData,
-  fetchData,
-} from "../../redux/reducers/headerSlice";
+import { selectGlobalData, fetchData } from "../../redux/reducers/headerSlice";
 import {
   convertToCurrency,
   formatKeys,
@@ -15,7 +9,6 @@ import {
 
 export default function HeaderStats() {
   const dispatch = useDispatch();
-  const count = useSelector(selectCount);
   const globalData = useSelector(selectGlobalData);
 
   useEffect(() => {
