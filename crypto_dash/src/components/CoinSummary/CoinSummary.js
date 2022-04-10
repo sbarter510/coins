@@ -18,21 +18,16 @@ export default function CoinSummary() {
     dispatch(fetchData(param.coin));
   }, []);
 
+  //cleans svg upon rerenders
   useEffect(() => {
     d3.selectAll("svg").remove();
   }, []);
 
   return (
-    <div>
+    <div style={{ width: "100%", maxHeight: "300px" }}>
       <h1>{param.coin.toUpperCase()} Chart Data</h1>
-      <div>
-        <LineChart2
-          coin={param.coin}
-          height={300}
-          width={1000}
-          data={chartData}
-        />
-      </div>
+
+      <LineChart2 coin={param.coin} height={100} width={300} data={chartData} />
     </div>
   );
 }
