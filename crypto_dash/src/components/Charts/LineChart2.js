@@ -4,7 +4,7 @@ import { selectCoinData } from "../../redux/reducers/coinsSlice";
 import * as d3 from "d3";
 import { useCallback } from "react";
 import { timeFormat } from "d3-time-format";
-import { posOrNegColor } from "../../helpers/helpers";
+import "./line2.scss";
 
 export default function Linechart2(props) {
   const { coin, data, width, height } = props;
@@ -43,21 +43,35 @@ export default function Linechart2(props) {
     var svg = d3
       .select(`.svg-container-${coin}`)
       .append("svg")
-      .attr("viewBox", `0 0 ${500} ${800}`)
+      .attr(
+        "viewBox",
+        `0 0  ${width - margin.left - margin.right} ${
+          height + margin.top + margin.bottom
+        }`
+      )
+      .attr("preserveAspectRatio", "xMinYMin meet")
       //   .attr("width", width + margin.left + margin.right + "%")
       //   .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("transform", `translate(15,${margin.top})`);
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
     let xAxis = d3
       .axisBottom()
       .scale(x)
+      // .attr("transform", `translate(0,${height})`)
       .tickFormat(d3.timeFormat("%H:%M:%S"))
-      .ticks(100)
-      .tickSize(0.1);
+      .ticks(d3.timeHour.every(3));
     let yAxis = d3.axisLeft().scale(y).ticks(3).tickSize("1px");
+
+    //add chart grid currently only using yaxis
+    // const xAxisGrid = d3
+    //   .axisBottom(x)
+    //   .tickSize(height)
+    //   .tickFormat("")
+    //   .ticks(10);
+    const yAxisGrid = d3.axisLeft(y).tickSize(-width).tickFormat("").ticks(3);
 
     x.domain(
       d3.extent(data, (d) => {
@@ -72,13 +86,29 @@ export default function Linechart2(props) {
         return d.y;
       }),
     ]);
+
+    svg.append("g").attr("class", "y-grid").call(yAxisGrid);
     svg
       .append("g")
       .call(d3.axisBottom(x))
       .call(xAxis)
-      .attr("transform", `translate(0,${height})`);
-
-    svg.append("g").call(d3.axisLeft(y)).call(yAxis);
+      .attr("transform", `translate(0,${height + 1})`)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("transform", "rotate(-45)")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("font-size", "3px");
+    // .attr("transform", `translate(0, ${height}) rotate(45deg)`);
+    svg
+      .append("g")
+      .call(d3.axisLeft(y))
+      .call(yAxis)
+      .selectAll("text")
+      .attr("dx", "-.8em")
+      // .attr("dy", ".15em")
+      .attr("font-size", "3px")
+      .style("margin-right", "10px");
 
     svg
       .append("path")

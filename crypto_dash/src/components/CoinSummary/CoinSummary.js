@@ -24,7 +24,7 @@ export default function CoinSummary() {
   }, []);
 
   return (
-    <div style={{ width: "100%", maxHeight: "300px" }}>
+    <div>
       <h1>{param.coin.toUpperCase()} Chart Data</h1>
 
       <LineChart2 coin={param.coin} height={100} width={300} data={chartData} />
