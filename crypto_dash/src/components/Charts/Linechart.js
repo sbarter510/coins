@@ -6,10 +6,8 @@ import { useCallback } from "react";
 import { timeFormat } from "d3-time-format";
 import { posOrNegColor } from "../../helpers/helpers";
 
-export default function Linechart(props) {
-  const { page } = props;
+export default function Linechart() {
   const coins = useSelector(selectCoinData);
-  console.log("test");
 
   useEffect(() => {
     createCharts();

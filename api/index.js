@@ -42,6 +42,15 @@ app.get("/global", async (req, res) => {
   res.json(data);
 });
 
+// coin summary data
+
+app.get("/summary/:coin_name", async (req, res) => {
+  const coinName = req.params.coin_name;
+  console.log(coinName);
+  let data = await CoinGeckoClient.coins.fetchMarketChart(coinName);
+  res.json(data);
+});
+
 app.listen(5000, () => {
   console.log("Server started on port 5000");
   return;

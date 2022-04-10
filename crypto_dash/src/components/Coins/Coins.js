@@ -165,7 +165,7 @@ export default function Coins() {
         <CoinsHeader />
         {createCoinsTable()}
         <PageNav page={page} onPageChangeHandler={onPageChangeHandler} />
-        <Linechart page={page} />
+        <Linechart />
       </div>
     </div>
   );

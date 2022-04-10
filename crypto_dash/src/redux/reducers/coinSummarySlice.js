@@ -2,21 +2,20 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchData = createAsyncThunk(
-  "header/fetchData",
-  async (thunkAPI) => {
-    const res = await axios.get("http://localhost:5000/global");
-    return res.data.data.data;
+  "coinSummary/fetchData",
+  async (coin) => {
+    const res = await axios.get(`http://localhost:5000/summary/${coin}`);
+    return res.data.data.prices;
   }
 );
 
 const initialState = {
-  value: 0,
-  globalData: [],
+  coinSummaryChartData: [],
   loading: null,
 };
 
-export const headerSlice = createSlice({
-  name: "header",
+export const coinSummarySlice = createSlice({
+  name: "coinSummary",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {},
@@ -25,8 +24,12 @@ export const headerSlice = createSlice({
       state.loading = true;
     },
     [fetchData.fulfilled]: (state, { payload }) => {
+      let formattedChartData = [];
+      payload.forEach((d) => {
+        formattedChartData.push({ x: d[0], y: +d[1] });
+      });
       state.loading = false;
-      state.globalData = payload;
+      state.coinSummaryChartData = formattedChartData;
     },
     [fetchData.rejected]: (state) => {
       state.loading = false;
@@ -34,6 +37,7 @@ export const headerSlice = createSlice({
   },
 });
 
-export const selectGlobalData = (state) => state.header.globalData;
+export const selectCoinChartData = (state) =>
+  state.coinSummary.coinSummaryChartData;
 
-export default headerSlice.reducer;
+export default coinSummarySlice.reducer;

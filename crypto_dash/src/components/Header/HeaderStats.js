@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  increment,
-  decrement,
-  selectCount,
-  selectGlobalData,
-  fetchData,
-} from "../../redux/reducers/headerSlice";
+import { selectGlobalData, fetchData } from "../../redux/reducers/headerSlice";
 import {
   convertToCurrency,
   formatKeys,
@@ -15,7 +9,6 @@ import {
 
 export default function HeaderStats() {
   const dispatch = useDispatch();
-  const count = useSelector(selectCount);
   const globalData = useSelector(selectGlobalData);
 
   useEffect(() => {
@@ -40,13 +33,23 @@ export default function HeaderStats() {
             <span>
               {formatKeys(k[0])}:{" "}
               <p style={posOrNegColor(k[1])}>{k[1].toFixed(2)}%</p>
-              <span
-                className="material-icons md-36"
-                id="arrow-icon"
-                style={posOrNegColor(k[1])}
-              >
-                arrow_upward
-              </span>
+              {k[1] > 0 ? (
+                <span
+                  className="material-icons md-36"
+                  id="arrow-icon"
+                  style={posOrNegColor(k[1])}
+                >
+                  arrow_upward
+                </span>
+              ) : (
+                <span
+                  className="material-icons md-36"
+                  id="arrow-icon"
+                  style={posOrNegColor(k[1])}
+                >
+                  arrow_downward
+                </span>
+              )}
             </span>
           </div>
         );
