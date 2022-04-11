@@ -3,8 +3,12 @@ import axios from "axios";
 
 export const fetchData = createAsyncThunk(
   "coinSummary/fetchData",
-  async (coin, days) => {
-    const res = await axios.get(`http://localhost:5000/summary/${coin}`);
+  async (args) => {
+    console.log(args.coin);
+    console.log(args.days);
+    const res = await axios.get(
+      `http://localhost:5000/summary/${args.coin}/${args.days}`
+    );
     return res.data.data.prices;
   }
 );

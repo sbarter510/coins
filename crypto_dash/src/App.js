@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import axios from "axios";
 import { useEffect } from "react";
 import AppContainer from "./components/AppContainer/AppContainer";
@@ -22,7 +22,10 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Coins />}></Route>
-              <Route path="/summary/:coin" element={<CoinSummary />}></Route>
+              <Route
+                path="/summary/:coin/:days"
+                element={<CoinSummary />}
+              ></Route>
             </Routes>
           </AppContainer>
         </Provider>

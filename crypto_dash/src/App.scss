@@ -46,3 +46,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* END RESET */
+
+.row {
+	display: flex;
+	
+	&.space-between {
+		justify-content: space-between;
+	}
+}

@@ -14,11 +14,12 @@ export default function CoinSummary() {
   const param = useParams();
   const dispatch = useDispatch();
   const chartData = useSelector(selectCoinChartData);
-  const [days, setDays] = useState(1);
+  const [days, setDays] = useState("1");
 
   // fetch chart data based on the coin provided in url param react router dom
   useEffect(() => {
-    dispatch(fetchData(param.coin, days));
+    console.log(param.days);
+    dispatch(fetchData({ coin: param.coin, days: days }));
   }, [days]);
 
   //cleans svg upon rerenders
@@ -30,17 +31,33 @@ export default function CoinSummary() {
     d3.selectAll("svg").remove();
   }, [days]);
 
+  const onDayClickHandler = () => {
+    return setDays(1);
+  };
+
   const onWeekClickHandler = () => {
     return setDays(7);
+  };
+
+  const onMonthClickHandler = () => {
+    return setDays(30);
   };
 
   return (
     <div style={{}}>
       <div className="coin-summary-header">
         <h1 className="header">{param.coin.toUpperCase()} Chart Data</h1>
-        <TextButton value="1 day" />
-        <TextButton value="7 day" onClickHandler={onWeekClickHandler} />
-        <TextButton value="30 day" />
+        <div className="row">
+          <div className="col">
+            <TextButton value="1 day" onClickHandler={onDayClickHandler} />
+          </div>
+          <div className="col">
+            <TextButton value="7 day" onClickHandler={onWeekClickHandler} />
+          </div>
+          <div className="col">
+            <TextButton value="30 day" onClickHandler={onMonthClickHandler} />
+          </div>
+        </div>
       </div>
       <LineChart2 coin={param.coin} height={100} width={500} data={chartData} />
     </div>

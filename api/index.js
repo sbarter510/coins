@@ -44,11 +44,13 @@ app.get("/global", async (req, res) => {
 
 // coin summary data
 
-app.get("/summary/:coin_name", async (req, res) => {
+app.get("/summary/:coin_name/:days", async (req, res) => {
   const coinName = req.params.coin_name;
   console.log(coinName);
+  const days = req.params.days;
+  console.log(days);
   let data = await CoinGeckoClient.coins.fetchMarketChart(coinName, {
-    // days: days ? days : "1",
+    days: days,
   });
 
   res.json(data);
