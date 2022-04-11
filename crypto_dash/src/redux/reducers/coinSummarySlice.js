@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchData = createAsyncThunk(
   "coinSummary/fetchData",
-  async (coin) => {
+  async (coin, days) => {
     const res = await axios.get(`http://localhost:5000/summary/${coin}`);
     return res.data.data.prices;
   }
@@ -25,11 +25,13 @@ export const coinSummarySlice = createSlice({
     },
     [fetchData.fulfilled]: (state, { payload }) => {
       let formattedChartData = [];
+      console.log(payload);
       payload.forEach((d) => {
         formattedChartData.push({ x: d[0], y: +d[1] });
       });
       state.loading = false;
       state.coinSummaryChartData = formattedChartData;
+      // state.coinSummaryChartData = payload;
     },
     [fetchData.rejected]: (state) => {
       state.loading = false;

@@ -63,7 +63,7 @@ export default function Linechart2(props) {
       // .attr("transform", `translate(0,${height})`)
       .tickFormat(d3.timeFormat("%H:%M:%S"))
       .ticks(d3.timeHour.every(3));
-    let yAxis = d3.axisLeft().scale(y).ticks(3).tickSize("1px");
+    let yAxis = d3.axisLeft().scale(y).ticks(4).tickSize("1px");
 
     //add chart grid currently only using yaxis
     // const xAxisGrid = d3
