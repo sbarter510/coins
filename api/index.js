@@ -14,7 +14,7 @@ const CoinGeckoClient = new CoinGecko();
 app.get("/", async (req, res) => {
   const page = req.query.page;
   let data = await CoinGeckoClient.coins.all({
-    per_page: 2,
+    per_page: 20,
     page: `${page ? page : 1}`,
   });
   res.json(data);
@@ -53,6 +53,13 @@ app.get("/summary/:coin_name/:days", async (req, res) => {
     days: days,
   });
 
+  res.json(data);
+});
+
+//summary text data
+app.get("/details/:coin_name", async (req, res) => {
+  const coinName = req.params.coin_name;
+  let data = await CoinGeckoClient.coins.fetch(coinName);
   res.json(data);
 });
 

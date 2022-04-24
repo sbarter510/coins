@@ -1,5 +1,17 @@
 .coin-summary-header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    width: 60%
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+
+    .chart-buttons {
+        justify-content: flex-end;
+    }
 }

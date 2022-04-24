@@ -1,5 +1,5 @@
 export const convertToCurrency = (value, currency) => {
-  return value.toLocaleString("en-US", {
+  return Number(value).toLocaleString("en-US", {
     style: "currency",
     currency: currency,
   });

@@ -22,10 +22,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Coins />}></Route>
-              <Route
-                path="/summary/:coin/:days"
-                element={<CoinSummary />}
-              ></Route>
+              <Route path="/summary/:coin" element={<CoinSummary />}></Route>
             </Routes>
           </AppContainer>
         </Provider>
