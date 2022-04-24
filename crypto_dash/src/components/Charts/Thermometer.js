@@ -38,7 +38,7 @@ export default function Thermometer(props) {
       ></div>
       <div className="thermometer-footer">
         <p>{convertToCurrency(low, "usd")}</p>
-        <p>24 Hour Range</p>
+        <p>24H Range</p>
         <p>{convertToCurrency(high, "usd")}</p>
       </div>
     </div>
