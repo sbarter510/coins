@@ -97,7 +97,12 @@ export default function CoinSummary() {
         />
       </div>
       <CoinStats />
-      <div className="coin-description">{showDescription()}</div>
+      <div
+        className="coin-description"
+        style={{ maxHeight: "200px", textOverflow: "ellipsis" }}
+      >
+        {showDescription()}
+      </div>
     </div>
   );
 }

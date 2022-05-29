@@ -10,7 +10,14 @@ export default function CoinStats() {
   if (coinDescription) {
     return (
       <div className="card coin-stats">
-        <div className="card-header">Price Statistics</div>
+        <div className="card-header">
+          <img
+            src={coinDescription.image.small}
+            alt="coin"
+            style={{ display: "block", margin: "0 auto 15px" }}
+          />
+          {coinDescription.name + " "}Price Statistics
+        </div>
         <div className="card-body">
           <span style={{ display: "inline" }}>
             Current Price:{" "}

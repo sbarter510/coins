@@ -8,20 +8,22 @@ export default function Thermometer(props) {
 
   const [low, setLow] = useState("");
   const [high, setHigh] = useState("");
-  const [range, setRange] = useState("");
+  // const [range, setRange] = useState("");
   const [width, setWidth] = useState("");
+  const [thermometerWidth, setThermometerWidth] = useState("");
 
   useEffect(() => {
     if (data && data.length > 0) {
       setLow(d3.min(data, (d) => d.y));
       setHigh(d3.max(data, (d) => d.y));
-      setRange(d3.extent(data, (d) => data.y));
+      // setRange(d3.extent(data, (d) => data.y));
     }
   }, [data]);
 
   const computeWidth = () => {
-    let lesserValues = data.filter((d) => d.y < low);
-    // setWidth({ width: (lesserValues.length / data.length) * 100 });
+    let form = data.filter((d) => d.y < data[data.length - 1].y);
+    let width = form.length / data.length;
+    setThermometerWidth(width);
   };
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Thermometer(props) {
     <div className="thermometer">
       <div
         className="thermometer-inner"
-        style={{ width: width.width + "%" }}
+        style={{ width: thermometerWidth * 100 + "%" }}
       ></div>
       <div className="thermometer-footer">
         <p>{convertToCurrency(low, "usd")}</p>

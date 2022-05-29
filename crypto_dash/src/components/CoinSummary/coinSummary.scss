@@ -1,6 +1,7 @@
 .coin-summary-container {
     display: grid;
     grid-template-columns: 3fr 1fr;
+    gap: 5px;
 }
 
 .coin-summary-header {
