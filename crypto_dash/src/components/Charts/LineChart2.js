@@ -7,7 +7,7 @@ import { timeFormat } from "d3-time-format";
 import "./line2.scss";
 
 export default function Linechart2(props) {
-  const { coin, data, width, height, scale } = props;
+  const { coin, data, width, height, scale, unique } = props;
   const coins = useSelector(selectCoinData);
 
   useEffect(() => {
@@ -159,5 +159,14 @@ export default function Linechart2(props) {
       );
   };
 
-  return <div className={`svg-container-${coin}`}></div>;
+  return (
+    <div
+      className={`svg-container-${coin}`}
+      style={{
+        padding: "100px",
+        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+        borderRadius: "15px",
+      }}
+    ></div>
+  );
 }

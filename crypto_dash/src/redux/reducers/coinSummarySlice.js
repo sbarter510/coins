@@ -16,9 +16,12 @@ export const fetchDescription = createAsyncThunk(
   async (args) => {
     const res = await axios.get(`http://localhost:5000/details/${args.coin}`);
     //TODO make language dynamic
-    return res.data.data.description.en;
+    console.log(res);
+    return res.data.data;
   }
 );
+
+// export const fetchMarketData = createAsyncThunk()
 
 const initialState = {
   coinSummaryChartData: [],
