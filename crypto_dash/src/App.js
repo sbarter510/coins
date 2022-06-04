@@ -9,6 +9,9 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import Coins from "./components/Coins/Coins";
 import CoinSummary from "./components/CoinSummary/CoinSummary";
+import Dashboard from "./components/Dashboard/Dashboard";
+
+import "materialize-css/dist/css/materialize.min.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -23,6 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Coins />}></Route>
               <Route path="/summary/:coin" element={<CoinSummary />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
             </Routes>
           </AppContainer>
         </Provider>

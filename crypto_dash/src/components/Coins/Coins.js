@@ -176,7 +176,7 @@ export default function Coins() {
   return (
     <div className="coins-container">
       <div className="coins-header">
-        <h2 className="header">Cryptocurrency Prices by Market Cap</h2>
+        <h5 className="header">Cryptocurrency Prices by Market Cap</h5>
       </div>
       <div className="coins-table">
         <CoinsHeader />
