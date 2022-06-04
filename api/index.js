@@ -14,7 +14,7 @@ const CoinGeckoClient = new CoinGecko();
 app.get("/", async (req, res) => {
   const page = req.query.page;
   let data = await CoinGeckoClient.coins.all({
-    per_page: 20,
+    per_page: 3,
     page: `${page ? page : 1}`,
   });
   res.json(data);

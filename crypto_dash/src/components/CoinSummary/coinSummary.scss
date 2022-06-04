@@ -1,8 +1,14 @@
+.coin-summary-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 5px;
+}
+
 .coin-summary-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 60%
+    padding: 10px;
 }
 
 .row {
@@ -10,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 5px;
+    border-radius: 15px;
 
     .chart-buttons {
         justify-content: flex-end;

@@ -12,6 +12,8 @@ import * as d3 from "d3";
 import TextButton from "../common/TextButton/TextButton";
 import "./coinSummary.scss";
 import Thermometer from "../Charts/Thermometer";
+import CoinStats from "./CoinStats";
+import CoinSummaryHeader from "./CoinSummaryHeader";
 
 export default function CoinSummary() {
   const param = useParams();
@@ -60,41 +62,32 @@ export default function CoinSummary() {
     return setDays("max");
   };
 
+  const showDescription = () => {
+    if (coinDescription) {
+      return (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: coinDescription.description.en,
+          }}
+        />
+      );
+    }
+  };
+
   return (
-    <div style={{}}>
-      <div className="coin-summary-header">
-        <div className="row">
-          <h1 className="header">{param.coin.toUpperCase()} Chart Data</h1>
-          <div className="row chart-buttons">
-            <div className="col">
-              <TextButton value="1d" onClickHandler={onDayClickHandler} />
-            </div>
-            <div className="col">
-              <TextButton value="7d" onClickHandler={onWeekClickHandler} />
-            </div>
-            <div className="col">
-              <TextButton value="30d" onClickHandler={onMonthClickHandler} />
-            </div>
-            <div className="col">
-              <TextButton value="Year" onClickHandler={onYearClickHandler} />
-            </div>
-            <div className="col">
-              <TextButton value="Max" onClickHandler={onMaxClickHandler} />
-            </div>
-          </div>
-        </div>
+    <div className="coin-summary-container">
+      <CoinSummaryHeader
+        coinName={param.coin.toUpperCase()}
+        onDayClickHandler={onDayClickHandler}
+        onWeekClickHandler={onWeekClickHandler}
+        onMonthClickHandler={onMonthClickHandler}
+        onYearClickHandler={onYearClickHandler}
+        onMaxClickHandler={onMaxClickHandler}
+      />
+      <div className="coin-summary-stats-header">
+        <Thermometer data={thermometerData} />
       </div>
-
-      <Thermometer data={thermometerData} />
-
-      <div
-        className="chart-container"
-        style={{
-          height: "100%",
-          width: "60%",
-          padding: "25px",
-        }}
-      >
+      <div className="chart-container">
         <LineChart2
           coin={param.coin}
           height={350}
@@ -103,8 +96,12 @@ export default function CoinSummary() {
           data={chartData}
         />
       </div>
-      <div className="coin-description">
-        <div dangerouslySetInnerHTML={{ __html: coinDescription }} />
+      <CoinStats />
+      <div
+        className="coin-description"
+        style={{ maxHeight: "200px", textOverflow: "ellipsis" }}
+      >
+        {showDescription()}
       </div>
     </div>
   );
