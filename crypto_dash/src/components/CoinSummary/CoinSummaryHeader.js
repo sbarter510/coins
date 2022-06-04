@@ -14,7 +14,7 @@ export default function CoinSummaryHeader(props) {
   return (
     <div className="coin-summary-header">
       <div className="row">
-        <h1 className="header">{coinName}</h1>
+        <h5 className="header">{coinName}</h5>
         <div className="row chart-buttons">
           <div className="col">
             <TextButton value="1d" onClickHandler={onDayClickHandler} />
