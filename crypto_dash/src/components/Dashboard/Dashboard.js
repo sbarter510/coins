@@ -6,7 +6,7 @@ export default function Dashboard() {
   return (
     <div>
       Dashboard
-      {profileData ? <h2>btc 2000</h2> : <h2>addData</h2>}
+      {profileData ? <h2>btc 3000</h2> : <h2>addData</h2>}
     </div>
   );
 }
